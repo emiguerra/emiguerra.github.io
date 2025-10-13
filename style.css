@@ -1,0 +1,150 @@
+/* -------------------- */
+/* 1. RESET Y BASE      */
+/* -------------------- */
+* {
+  box-sizing: border-box; /* Modelo de caja moderno y predecible */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Courier New', Courier, monospace; /* Cambia a tu fuente de diseño */
+  line-height: 1.6;
+  color: #333; /* Color de texto principal */
+  background-color: #f9f9f9; /* Fondo de la página */
+}
+
+/* -------------------- */
+/* 2. HEADER Y NAV      */
+/* -------------------- */
+.header {
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto; /* Centrar el contenedor */
+  padding: 0 20px;
+  /* Usar Flexbox para alinear el logo y la navegación */
+  display: flex;
+  justify-content: space-between; /* Espaciar logo y nav */
+  align-items: center; /* Alinear verticalmente */
+}
+
+.logo-img {
+  max-height: 80px; /* Tamaño del logo */
+  display: block;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #555;
+  margin-left: 20px;
+  transition: color 0.3s; /* Transición suave para el hover */
+}
+
+.nav-link:hover {
+  color: #000;
+}
+
+/* -------------------- */
+/* 3. SECCIONES GENERALES */
+/* -------------------- */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+section {
+  padding: 4rem 0; /* Espaciado entre secciones */
+}
+
+/* -------------------- */
+/* 4. HERO SECTION      */
+/* -------------------- */
+.hero {
+  text-align: center;
+  padding: 8rem 0; /* Mayor espacio para la sección de bienvenida */
+}
+
+.hero h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.info-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+  /* Estilos iniciales para ocultar */
+  padding: 0 20px;
+}
+
+/* Clase que JS agregará para mostrar el panel */
+.info-panel.visible {
+  max-height: 500px; /* Un valor grande para mostrar el contenido */
+  padding: 20px;
+}
+
+
+/* -------------------- */
+/* 5. PROYECTOS         */
+/* -------------------- */
+.projects h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.project-card {
+    /* Si tienes más de una tarjeta, usa Grid para el contenedor de .projects */
+    /* Por ahora, enfocándonos en la tarjeta individual */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.project-card img {
+    width: 50%; /* Asegura que la imagen ocupe todo el ancho */
+    height: auto;
+    display: block;
+      /* --- AÑADE ESTO --- */
+    margin-left: 20px; /* Margen fijo a la izquierda */
+    /* Para que el 50% de ancho y el margen izquierdo funcionen juntos */
+    margin-right: auto; 
+}
+
+/* -------------------- */
+/* 6. RESPONSIVE        */
+/* -------------------- */
+@media (max-width: 768px) {
+  /* En pantallas más pequeñas, ajustamos la navegación */
+  .header-container {
+    flex-direction: column; /* Apilar logo y nav */
+    text-align: center;
+  }
+
+  .nav {
+    margin-top: 1rem;
+  }
+
+  .nav-link {
+    display: block; /* Cada link en su propia línea */
+    margin: 10px 0;
+  }
+
+  .hero h2 {
+    font-size: 2rem; /* Reducir tamaño de fuente en móvil */
+  }
+
+  section {
+    padding: 2rem 0;
+  }
+}
