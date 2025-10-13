@@ -79,20 +79,42 @@ section {
   margin-bottom: 2rem;
 }
 
+/* ----------------------------------------------------- */
+/* ESTILOS PARA LA INTERACTIVIDAD (TOGGLEINFO) CON CSS   */
+/* ----------------------------------------------------- */
+
+.hero button {
+  /* Estilo básico para el botón */
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.hero button:hover {
+  background-color: #555;
+}
+
 .info-panel {
+  /* Estilos para la transición: inicia oculto */
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
-  /* Estilos iniciales para ocultar */
-  padding: 0 20px;
+  padding: 0 20px; /* Padding vertical inicial 0, padding horizontal se mantiene */
+  background-color: #eee; /* Fondo para que se note la sección */
+  text-align: center;
+  /* El JS debe añadir/quitar la clase 'visible' */
 }
 
-/* Clase que JS agregará para mostrar el panel */
+/* Clase que JS debe agregar para mostrar el panel (toggleInfo) */
 .info-panel.visible {
-  max-height: 500px; /* Un valor grande para mostrar el contenido */
-  padding: 20px;
+  max-height: 500px; /* Valor grande para asegurar que el contenido se muestre */
+  padding: 20px; /* Padding que aparece al volverse visible */
 }
-
 
 /* -------------------- */
 /* 5. PROYECTOS         */
@@ -102,6 +124,13 @@ section {
     margin-bottom: 3rem;
 }
 
+/* Contenedor que centra la galería y da margen lateral (AÑADIDO) */
+.proyectos-container {
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto;    /* Centra el contenedor */
+    padding: 0 10px;   /* Margen lateral */
+}
+
 .project-card {
     /* Si tienes más de una tarjeta, usa Grid para el contenedor de .projects */
     /* Por ahora, enfocándonos en la tarjeta individual */
@@ -109,16 +138,15 @@ section {
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 2rem;
+    padding: 20px;
 }
 
 .project-card img {
-    width: 50%; /* Asegura que la imagen ocupe todo el ancho */
+    /* Mantenemos el 50% de ancho, pero centramos la imagen en su propio contexto */
+    width: 50%;
     height: auto;
     display: block;
-      /* --- AÑADE ESTO --- */
-    margin-left: 20px; /* Margen fijo a la izquierda */
-    /* Para que el 50% de ancho y el margen izquierdo funcionen juntos */
-    margin-right: auto; 
+    margin: 0 auto 20px auto; /* Centrado y con margen inferior */
 }
 
 /* -------------------- */
@@ -147,4 +175,65 @@ section {
   section {
     padding: 2rem 0;
   }
+}
+/*
+ * ========================================
+ * ESTILOS DE GALERÍA (REEMPLAZO DE COLUMNAS DE BOOTSTRAP)
+ * ========================================
+ */
+
+.project-gallery-container {
+    /* Usa CSS Grid para crear la cuadrícula compacta */
+    display: grid;
+    /* 3 columnas de igual ancho (1fr cada una) */
+    grid-template-columns: repeat(3, 1fr); 
+    /* CORRECCIÓN: Se aumentó el margen y se eliminó el error de sintaxis */
+    gap: 25px; 
+}
+
+/* El elemento del proyecto */
+.project-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    /* Asegura que no tenga márgenes de columna de Bootstrap */
+    margin-bottom: 0 !important; 
+}
+
+/* Imagen dentro del proyecto */
+.project-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto de 'hover' (opcional: para darle vida) */
+.project-item:hover img {
+    transform: scale(1.05); /* Zoom ligero al pasar el ratón */
+}
+
+/*
+ * ========================================
+ * MEDIA QUERIES (RESPONSIVE DESIGN)
+ * ========================================
+ */
+
+/* En tablets (pantallas medianas) usa 2 columnas */
+@media (max-width: 992px) {
+    .project-gallery-container {
+        /* Asegura que el gap responsivo funcione bien */
+        gap: 15px; 
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* En móviles (pantallas pequeñas) usa 1 columna */
+@media (max-width: 576px) {
+    .project-gallery-container {
+        /* Asegura que el gap responsivo funcione bien */
+        gap: 10px; 
+        grid-template-columns: 1fr;
+    }
 }
