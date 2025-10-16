@@ -11,7 +11,12 @@ body {
   font-family: 'Courier New', Courier, monospace; /* Cambia a tu fuente de diseño */
   line-height: 1.6;
   color: #333; /* Color de texto principal */
-  background-color: #f9f9f9; /* Fondo de la página */
+  
+  /* 🛑 CLAVE 1: Fondo de la página visible por defecto es BLANCO SÓLIDO */
+  background-color: white; 
+  
+  position: relative; 
+  min-height: 100vh;
 }
 
 /* -------------------- */
@@ -20,6 +25,11 @@ body {
 .header {
   padding: 1rem 0;
   border-bottom: 1px solid #eee;
+  
+  /* CLAVE: Fondo blanco sólido y z-index alto para estar encima del video */
+  position: relative; 
+  z-index: 10;
+  background-color: white; 
 }
 
 .header-container {
@@ -39,7 +49,7 @@ body {
 
 .nav-link {
   text-decoration: none;
-  color: #555;
+  color: #333; /* Color ajustado para fondo blanco */
   margin-left: 20px;
   transition: color 0.3s; /* Transición suave para el hover */
 }
@@ -59,6 +69,9 @@ main {
 
 section {
   padding: 4rem 0; /* Espaciado entre secciones */
+  /* Asegura que todas las secciones estén sobre el video */
+  position: relative;
+  z-index: 5;
 }
 
 /* -------------------- */
@@ -67,6 +80,10 @@ section {
 .hero {
   text-align: center;
   padding: 8rem 0; /* Mayor espacio para la sección de bienvenida */
+  
+  /* CLAVE: Fondo semitransparente para que el 'manto' se vea a través */
+  background-color: rgba(255, 255, 255, 0.7); /* Blanco con 70% de opacidad */
+  color: #333; /* Texto oscuro para contraste */
 }
 
 .hero h2 {
@@ -132,8 +149,6 @@ section {
 }
 
 .project-card {
-    /* Si tienes más de una tarjeta, usa Grid para el contenedor de .projects */
-    /* Por ahora, enfocándonos en la tarjeta individual */
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
@@ -142,20 +157,62 @@ section {
 }
 
 .project-card img {
-    /* Mantenemos el 50% de ancho, pero centramos la imagen en su propio contexto */
     width: 50%;
     height: auto;
     display: block;
     margin: 0 auto 20px auto; /* Centrado y con margen inferior */
 }
 
-/* -------------------- */
-/* 6. RESPONSIVE        */
-/* -------------------- */
+/* Fondo para la sección Proyectos: blanco sólido */
+#proyectos {
+    background-color: white; 
+    color: #333;
+}
+
+
+/* ----------------------------------------------------- */
+/* ESTILOS DE GALERÍA */
+/* ----------------------------------------------------- */
+.project-gallery-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 25px; 
+}
+
+.project-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    margin-bottom: 0 !important; 
+}
+
+.project-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover img {
+    transform: scale(1.05); 
+}
+
+
+/* ----------------------------------------------------- */
+/* 6. RESPONSIVE Y MEDIA QUERIES */
+/* ----------------------------------------------------- */
+@media (max-width: 992px) {
+    .project-gallery-container {
+        gap: 15px; 
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
   /* En pantallas más pequeñas, ajustamos la navegación */
   .header-container {
-    flex-direction: column; /* Apilar logo y nav */
+    flex-direction: column; 
     text-align: center;
   }
 
@@ -164,76 +221,299 @@ section {
   }
 
   .nav-link {
-    display: block; /* Cada link en su propia línea */
+    display: block; 
     margin: 10px 0;
   }
 
   .hero h2 {
-    font-size: 2rem; /* Reducir tamaño de fuente en móvil */
+    font-size: 2rem; 
   }
 
   section {
     padding: 2rem 0;
   }
 }
-/*
- * ========================================
- * ESTILOS DE GALERÍA (REEMPLAZO DE COLUMNAS DE BOOTSTRAP)
- * ========================================
- */
 
-.project-gallery-container {
-    /* Usa CSS Grid para crear la cuadrícula compacta */
-    display: grid;
-    /* 3 columnas de igual ancho (1fr cada una) */
-    grid-template-columns: repeat(3, 1fr); 
-    /* CORRECCIÓN: Se aumentó el margen y se eliminó el error de sintaxis */
-    gap: 25px; 
-}
-
-/* El elemento del proyecto */
-.project-item {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    /* Asegura que no tenga márgenes de columna de Bootstrap */
-    margin-bottom: 0 !important; 
-}
-
-/* Imagen dentro del proyecto */
-.project-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-/* Efecto de 'hover' (opcional: para darle vida) */
-.project-item:hover img {
-    transform: scale(1.05); /* Zoom ligero al pasar el ratón */
-}
-
-/*
- * ========================================
- * MEDIA QUERIES (RESPONSIVE DESIGN)
- * ========================================
- */
-
-/* En tablets (pantallas medianas) usa 2 columnas */
-@media (max-width: 992px) {
+@media (max-width: 576px) {
     .project-gallery-container {
-        /* Asegura que el gap responsivo funcione bien */
-        gap: 15px; 
-        grid-template-columns: repeat(2, 1fr);
+        gap: 10px; 
+        grid-template-columns: 1fr;
     }
 }
 
-/* En móviles (pantallas pequeñas) usa 1 columna */
-@media (max-width: 576px) {
-    .project-gallery-container {
-        /* Asegura que el gap responsivo funcione bien */
-        gap: 10px; 
+
+/* ----------------------------------------------------- */
+/* 🛑 ESTILOS DEL VIDEO DE FONDO (MANTO ANIMADO) 🛑 */
+/* ----------------------------------------------------- */
+#background-video {
+  /* Fija el video en el viewport (pantalla) */
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  
+  /* CLAVE: Lo envía detrás del contenido, pero encima del fondo BLANCO del body */
+  z-index: -1; 
+  
+  /* CLAVE: Opacidad baja para que el blanco del fondo se filtre (el "manto" sutil) */
+  opacity: 0.7; 
+  
+  /* Asegura que NO haya filtro adicional */
+  filter: none; 
+}
+/* -------------------- */
+/* CONTACTO SECTION     */
+/* -------------------- */
+
+.contact-section {
+    /* Fondo blanco para que el contenido sea legible y destaque */
+    background-color: white; 
+    /* Asegura que la sección esté por encima del video de fondo */
+    position: relative;
+    z-index: 5;
+}
+
+.contact-container {
+    /* Centrado y ancho máximo para la estructura de dos columnas */
+    max-width: 1000px; 
+    margin: 0 auto;
+    padding: 6rem 20px; /* Padding vertical generoso */
+    
+    /* Disposición de 2 columnas con CSS Grid */
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 60px; /* Espacio entre las columnas */
+    align-items: start; 
+}
+
+/* -------------------- */
+/* Columna de Información (Texto) */
+/* -------------------- */
+.contact-info h2 {
+    font-size: 3rem; /* Tamaño destacado */
+    margin-bottom: 1.5rem;
+    color: #333;
+    
+    /* 🛑 CORRECCIÓN DE INTERLETRADO (más compacto) */
+    letter-spacing: -0.03em; 
+    /* CORRECCIÓN DE INTERLINEADO (más apretado) */
+    line-height: 1.1; 
+}
+
+.contact-info p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.info-details {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+}
+
+.info-details a {
+    color: #333;
+    text-decoration: underline;
+}
+
+/* -------------------- */
+/* Columna de Formulario */
+/* -------------------- */
+.contact-form-wrapper h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-form label {
+    display: block; 
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="subject"],
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 0; 
+    font-family: inherit;
+    font-size: 0.5rem;
+    transition: border-color 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #333; 
+    outline: none;
+}
+
+.contact-form textarea {
+    resize: vertical; 
+}
+
+.submit-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #333; 
+    border-radius: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: white; 
+    color: #333;
+}
+
+/* -------------------- */
+/* MEDIA QUERY (Móviles: 768px y menos) */
+/* -------------------- */
+@media (max-width: 768px) {
+    .contact-container {
+        /* En móviles, se apila a una sola columna */
         grid-template-columns: 1fr;
+        gap: 40px; 
+        padding: 4rem 20px; 
+    }
+    
+    .contact-info h2 {
+        font-size: 2rem; /* Reduce el tamaño en móvil */
+        letter-spacing: normal; /* Vuelve al espaciado normal */
+    }
+}
+/* -------------------- */
+/* CONTACTO SECTION     */
+/* -------------------- */
+
+.contact-section {
+    /* Fondo blanco para que el contenido sea legible y destaque */
+    background-color: white; 
+    /* Asegura que la sección esté por encima del video de fondo */
+    position: relative;
+    z-index: 5;
+}
+
+.contact-container {
+    /* Centrado y ancho máximo para la estructura de dos columnas */
+    max-width: 1000px; 
+    margin: 0 auto;
+    padding: 6rem 20px; /* Padding vertical generoso */
+    
+    /* Disposición de 2 columnas con CSS Grid */
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 60px; /* Espacio entre las columnas */
+    align-items: start; 
+}
+
+/* -------------------- */
+/* Columna de Información (Texto) */
+/* -------------------- */
+.contact-info h2 {
+    font-size: 3rem; /* Tamaño destacado */
+    margin-bottom: 1.5rem;
+    color: #333;
+    
+    /* 🛑 CORRECCIÓN DE INTERLETRADO (más compacto) */
+    letter-spacing: -0.03em; 
+    /* CORRECCIÓN DE INTERLINEADO (más apretado) */
+    line-height: 1.1; 
+}
+
+.contact-info p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.info-details {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+}
+
+.info-details a {
+    color: #333;
+    text-decoration: underline;
+}
+
+/* -------------------- */
+/* Columna de Formulario */
+/* -------------------- */
+.contact-form-wrapper h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-form label {
+    display: block; 
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="subject"],
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 0; 
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #333; 
+    outline: none;
+}
+
+.contact-form textarea {
+    resize: vertical; 
+}
+
+.submit-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #333; 
+    border-radius: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: white; 
+    color: #333;
+}
+
+/* -------------------- */
+/* MEDIA QUERY (Móviles: 768px y menos) */
+/* -------------------- */
+@media (max-width: 768px) {
+    .contact-container {
+        /* En móviles, se apila a una sola columna */
+        grid-template-columns: 1fr;
+        gap: 40px; 
+        padding: 4rem 20px; 
+    }
+    
+    .contact-info h2 {
+        font-size: 2rem; /* Reduce el tamaño en móvil */
+        letter-spacing: normal; /* Vuelve al espaciado normal */
     }
 }
