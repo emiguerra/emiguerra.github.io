@@ -1,13 +1,13 @@
-# [Tu Nombre] - Portafolio
+# [Emilia Guerra] - Portafolio
 
 Este es mi portafolio personal, donde presento mis proyectos, intereses y experiencia en diseño y desarrollo.
 
-## 🧠 Tecnologías usadas
+## Tecnologías usadas
 - HTML5
 - CSS3
-- JavaScript (Vanilla)
+- JavaScript 
 
-## 💡 Estructura
+## Estructura
 - index.html: Página principal
 - about.html: Página “Sobre mí”
 - style.css: Estilos globales
@@ -19,4 +19,4 @@ Este es mi portafolio personal, donde presento mis proyectos, intereses y experi
 2. Abre index.html en tu navegador  
 3. Personaliza los textos, enlaces e imágenes
 
-© 2025 [Tu Nombre]
+© 2025 Emilia Guerra Aguiló
