@@ -14,7 +14,7 @@ Este es mi portafolio personal, donde presento mis proyectos, intereses y experi
 - script.js: Interactividad
 - assets/: Imágenes e íconos
 
-## 🚀 Cómo usar
+## Cómo usar
 1. Clona este repositorio  
 2. Abre index.html en tu navegador  
 3. Personaliza los textos, enlaces e imágenes
